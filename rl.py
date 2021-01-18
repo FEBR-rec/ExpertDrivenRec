@@ -1,7 +1,6 @@
 from utils import proba_trans, generatesIndexSlates
 from recsim import choice_model
 from ExpertRecEval import *
-from maxEnt_irl import generate_trajectories
 
 
 
@@ -63,10 +62,6 @@ def policy_iteration(list_states, rewards, _policy, gamma, num_candidate, size_s
 
 
 
-
-
-
-
 def value_iteration(list_states, rewards, gamma, num_candidate, size_slate, max_iter=1000, error=0.01):
 
     """
@@ -122,34 +117,3 @@ def value_iteration(list_states, rewards, gamma, num_candidate, size_slate, max_
 
 
 
-
-
-if __name__ == '__main__':
-    from recsim.environments import interest_evolution
-
-    slate_size = 3
-    num_candidates = 10
-    env_config = {
-        'num_candidates': 5,
-        'slate_size': slate_size,
-        'resample_documents': True,
-        'seed': 0,
-    }
-
-    tmp_base_dir = 'C:/Users/Moham/PycharmProjects/ExpertDrivenRec/'
-
-    user_model = interest_evolution.IEvUserModel(
-        slate_size,
-        choice_model_ctor=choice_model.MultinomialProportionalChoiceModel,
-        response_model_ctor=interest_evolution.IEvResponse,
-        user_state_ctor=interest_evolution.IEvUserState,
-        seed=0)
-
-    expertEnv = environment.Environment(
-        ExpertModel(slate_size),
-        EEVideoSampler(),
-        num_candidates,
-        slate_size,
-        resample_documents=True)
-    steps = 10
-    traj, states = generate_trajectories(expertEnv, 3, steps, num_candidates, slate_size)

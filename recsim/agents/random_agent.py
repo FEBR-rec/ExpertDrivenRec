@@ -54,7 +54,6 @@ class RandomAgent(agent.AbstractEpisodicRecommenderAgent):
     # Simulate a random slate
     doc_ids = list(range(len(doc_obs)))
     self._rng.shuffle(doc_ids)
-    print(doc_obs)
 
     slate = doc_ids[:self._slate_size]
     logging.debug('Recommended slate: %s', slate)

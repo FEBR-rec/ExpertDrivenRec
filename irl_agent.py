@@ -45,7 +45,7 @@ class InverseRLAgent():
 
         self.ml_model = ml_model
 
-        self.loaded_model = pickle.load(open(filename, 'rb'))
+        self.loaded_model = None
         # list to save all state's qualities through a given session (episode)
         self.list_quality_videos = []
         # list to save watching time of selected videos through a given session (episode)
@@ -68,10 +68,10 @@ class InverseRLAgent():
 	    """
 
 
-        if self.ml_model:
+        if not self.ml_model:
             for i in range(len(self.states)):
                 if self.find_state_(observation, self.states[i], margin_score=0.5, margin_interests=0.5):
-                    print("state found ")
+                    #print("state found ")
                     for j in self.states[i][1]:
                         if j[0] == 1:
                             self.expert_watch += j[5]
@@ -80,10 +80,10 @@ class InverseRLAgent():
 
                     self.count += 1
                     return self.list_actions[np.argmax(self.policy[i])], 1
-            print("state not found")
+            #print("state not found")
             return self.list_actions[np.random.randint(0, len(self.list_actions), dtype=int)], 0
         else:
-            print(observation['user'])
+            self.loaded_model = pickle.load(open(filename, 'rb'))
             s = self.loaded_model.predict([observation['user']])
 
             return self.list_actions[int(s)], 1

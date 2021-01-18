@@ -127,6 +127,7 @@ class IEvVideo(document.AbstractDocument):
     # The number of features to represent each video.
     NUM_FEATURES = 3
 
+
     def __init__(self,
                  doc_id,
                  features,

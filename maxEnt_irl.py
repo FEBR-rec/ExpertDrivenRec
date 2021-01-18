@@ -1,7 +1,6 @@
 '''
 Implementation of MaxEnt-IRL model for FBER recommendation system, based on 
 the approach of Ziebart et al. 2008 paper: Maximum Entropy Inverse Reinforcement Learning
-https://www.aaai.org/Papers/AAAI/2008/AAAI08-227.pdf
 
 '''
 
